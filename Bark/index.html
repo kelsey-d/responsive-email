@@ -87,6 +87,75 @@
                 padding: 15px;
             }
 
+            @media only screen and (max-width: 600px) {
+                .two-column, .three-column {
+                    display: block;
+                    width: 100% !important;
+                    font-size: initial;
+                    padding: 0 !important;
+                }
+                .two-column .column, .three-column .column {
+                    display: block;
+                    width: 100% !important;
+                    margin: 0 0 16px 0 !important;
+                    padding: 0 !important;
+                }
+                /* Reorder image and text columns for two-column layout */
+                .two-column .column:first-child {
+                    order: 2;
+                }
+                .two-column .column:last-child {
+                    order: 1;
+                }
+                /* For the second two-column block, reverse order as well */
+                .two-column tr > td:first-child {
+                    order: 2;
+                }
+                .two-column tr > td:last-child {
+                    order: 1;
+                }
+                /* For three-column, stack columns */
+                .three-column .column {
+                    order: unset;
+                }
+                /* Images full width on mobile */
+                img {
+                    height: auto !important;
+                    max-width: 100% !important;
+                }
+            }
+
+            /* --- Fluid hybrid for two-column layout --- */
+            @media only screen and (max-width:600px) {
+                .stack-column {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .stack-img {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .stack-text {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .hide-mobile {
+                    display: none !important;
+                }
+                .show-mobile {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                img {
+                    height: auto !important;
+                    max-width: 100% !important;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -119,16 +188,22 @@
                 </tr>
                 <tr>
                     <td>
-                        <table class="two-column">
+                        <!-- Two-column block 1 (fluid hybrid for mobile image-first) -->
+                        <table class="two-column" width="100%" style="text-align:left;">
                             <tr>
-                                <td class="column" style="padding-right: 5px; text-align:left; vertical-align: top;">
+                                <!-- Image first on mobile -->
+                                <td class="column stack-img show-mobile" style="display:none;">
+                                    <img src="img/vertical-one.jpg" alt="dog" width="100%" style="max-width:100%;">
+                                </td>
+                                <td class="column stack-text">
                                     <h2>Top Ten Puppy <br>Training Tips</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia mollitia quas totam! Aliquam temporibus nihil assumenda commodi voluptatem ea esse! Aut itaque cum ab! Suscipit quia delectus ex quisquam omnis.</p>
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error enim exercitationem sapiente nisi alias eius.</p>
                                     <a href="#" class="button">Find out more</a>
                                 </td>
-                                <td class="column">
-                                    <img src="img/vertical-one.jpg" alt="dog" width="100%" style="max-width: 100%;">
+                                <!-- Image for desktop -->
+                                <td class="column stack-img hide-mobile" style="padding-left:5px;">
+                                    <img src="img/vertical-one.jpg" alt="dog" width="100%" style="max-width:100%;">
                                 </td>
                             </tr>
                         </table>
@@ -189,12 +264,13 @@
                 </tr>
                 <tr>
                     <td>
-                        <table class="two-column" >
+                        <!-- Two-column block 2 (restore to original, side-by-side only) -->
+                        <table class="two-column" width="100%" style="text-align:left;">
                             <tr>
-                                <td  class="column" style="padding-right: 5px;">
+                                <td class="column" style="padding-right: 5px;">
                                     <img src="img/vertical-two.jpg" alt="dog" width="100%" style="max-width: 100%;">
                                 </td>
-                                <td  class="column" width=100% style="text-align: left; vertical-align:top;">
+                                <td class="column" width=100% style="text-align: left; vertical-align:top;">
                                     <h2 style="margin-top: 0;">Top Ten Puppy <br>Training Tips</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia mollitia quas totam! Aliquam temporibus nihil assumenda commodi voluptatem ea esse! Aut itaque cum ab! Suscipit quia delectus ex quisquam omnis.</p>
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error enim exercitationem sapiente nisi alias eius.</p>
